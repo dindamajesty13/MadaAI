@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .chat-container { width: 60%; margin: auto; text-align: left; }
+        .message { padding: 10px; border-radius: 8px; margin: 5px 0; }
+        .user { background-color: #007bff; color: white; text-align: right; }
+        .bot { background-color: #f1f1f1; text-align: left; }
+        .input-container { margin-top: 20px; display: flex; }
+        input { flex: 1; padding: 10px; }
+        button { padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Chat with AI</h2>
+    <div class="chat-container" id="chatContainer"></div>
+
+    <div class="input-container">
+        <input type="text" id="userInput" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            let userInput = document.getElementById("userInput").value;
+            if (!userInput.trim()) return;
+
+            // Append user message to chat
+            appendMessage("You", userInput, "user");
+
+            // Call Django API
+            try {
+                let response = await fetch("/chat/generate/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ prompt: userInput })
+                });
+
+                let data = await response.json();
+                if (response.ok) {
+                    // Now access 'answer' from the response object
+                    let botMessage = data.answer || "No answer from AI";  // Adjusted to use 'answer'
+                    appendMessage("AI", botMessage, "bot");
+                } else {
+                    appendMessage("Error", "Failed to get a response.", "bot");
+                }
+            } catch (error) {
+                appendMessage("Error", "Something went wrong.", "bot");
+            }
+
+            // Clear input field
+            document.getElementById("userInput").value = "";
+        }
+
+        function appendMessage(sender, message, type) {
+            let chatContainer = document.getElementById("chatContainer");
+            let messageDiv = document.createElement("div");
+            messageDiv.className = `message ${type}`;
+            messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+    </script>
+
+</body>
+</html>

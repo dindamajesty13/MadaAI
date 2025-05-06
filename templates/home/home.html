@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+    <script>
+        async function fetchProducts() {
+            let token = localStorage.getItem('access_token');
+            if (!token) {
+                alert("You must log in first!");
+                window.location.href = window.location.origin + "/login";
+                return;
+            }
+
+            let response = await fetch('/api/products/', {
+                method: 'GET',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (response.status === 401) {
+                let refreshed = await refreshToken();
+                if (refreshed) {
+                    fetchProducts(); // Retry fetching products
+                } else {
+                    alert("Session expired, logging out...");
+                    logoutUser();
+                }
+                return;
+            }
+
+            let data = await response.json();
+            let productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+            data.forEach(product => {
+                productList.innerHTML += `<li>${product.name} - $${product.price}</li>`;
+            });
+        }
+
+        async function refreshToken() {
+            let refresh = localStorage.getItem('refresh_token');
+            if (!refresh) return false;
+
+            let response = await fetch('/api/token/refresh/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ refresh })
+            });
+
+            if (response.ok) {
+                let data = await response.json();
+                localStorage.setItem('access_token', data.access);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        async function addProduct() {
+            let token = localStorage.getItem('access_token');
+            let name = document.getElementById('name').value;
+            let price = document.getElementById('price').value;
+            let description = document.getElementById('description').value;
+
+            let response = await fetch('/api/products/create/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ name, price, description })
+            });
+
+            if (response.status === 401) {
+                let refreshed = await refreshToken();
+                if (refreshed) {
+                    addProduct(); // Retry adding product
+                } else {
+                    alert("Session expired, logging out...");
+                    logoutUser();
+                }
+                return;
+            }
+
+            if (response.ok) {
+                fetchProducts();
+            }
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            window.location.href = window.location.origin + "/login";
+        }
+    </script>
+</head>
+<body onload="fetchProducts()">
+    <h1>Products</h1>
+    <ul id="product-list"></ul>
+
+    <h2>Add Product</h2>
+    <input type="text" id="name" placeholder="Product Name">
+    <input type="number" id="price" placeholder="Price">
+    <input type="text" id="description" placeholder="Description">
+    <button onclick="addProduct()">Add</button>
+
+    <br><br>
+    <button onclick="logoutUser()">Logout</button>
+</body>
+</html>

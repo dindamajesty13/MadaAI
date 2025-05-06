@@ -1,0 +1,60 @@
+<footer class="sticky left-0 bottom-0 z-999 flex w-full bg-white dark:bg-boxdark shadow-lg dark:shadow-none">
+      <div class="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="{% url 'home' %}" class="text-xl font-bold text-gray-800 dark:text-white">
+                        My Django App
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="flex space-x-4 mb-4 md:mb-0">
+                    <a href="{% url 'home' %}" class="hover:underline text-gray-600 dark:text-gray-300">About Us</a>
+                    <a href="{% url 'home' %}" class="hover:underline text-gray-600 dark:text-gray-300">Services</a>
+                    <a href="{% url 'home' %}" class="hover:underline text-gray-600 dark:text-gray-300">Pricing</a>
+                    <a href="{% url 'home' %}" class="hover:underline text-gray-600 dark:text-gray-300">Contact</a>
+                </div>
+
+                <!-- Social Media Icons -->
+                <div class="flex space-x-4">
+                    <a href="https://www.facebook.com" class="hover:text-blue-500">
+                        <svg
+                        class="w-6 h-6"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M22 12C22 6.48 17.52 2 12 2S2 6.48 2 12c0 5.02 3.66 9.15 8.44 9.87v-6.99h-2.5V12h2.5v-1.79c0-2.46 1.46-3.81 3.68-3.81 1.07 0 2.18.18 2.18.18v2.4h-1.23c-1.21 0-1.58.76-1.58 1.53V12h2.67l-.43 2.88h-2.24v6.99C18.34 21.15 22 17.02 22 12z" />
+                      </svg>
+                    </a>
+                    <a href="https://www.twitter.com" class="hover:text-blue-400">
+                        <svg
+                        class="w-6 h-6"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M22.46 6c-.77.35-1.6.59-2.46.7a4.28 4.28 0 001.88-2.37 8.5 8.5 0 01-2.7 1.03 4.3 4.3 0 00-7.34 3.92 12.16 12.16 0 01-8.8-4.47A4.3 4.3 0 003.88 9c-.5-.01-.98-.07-1.44-.23v.03a4.3 4.3 0 003.44 4.2 4.3 4.3 0 01-1.94.08A4.3 4.3 0 008.3 17.4a8.62 8.62 0 01-6.3 1.76 12.14 12.14 0 006.56 1.93c7.88 0 12.2-6.54 12.2-12.2 0-.19-.01-.38-.02-.57a8.7 8.7 0 002.14-2.2z" />
+                      </svg>
+                    </a>
+                    <a href="https://www.instagram.com" class="hover:text-pink-500">
+                        <svg
+                        class="w-6 h-6"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M12 2.16c3.18 0 3.58.01 4.85.07 1.24.06 1.95.27 2.41.45.59.23 1.01.5 1.45.94.44.44.71.86.94 1.45.18.46.39 1.17.45 2.41.06 1.27.07 1.67.07 4.85s-.01 3.58-.07 4.85c-.06 1.24-.27 1.95-.45 2.41-.23.59-.5 1.01-.94 1.45-.44.44-.86.71-1.45.94-.46.18-1.17.39-2.41.45-1.27.06-1.67.07-4.85.07s-3.58-.01-4.85-.07c-1.24-.06-1.95-.27-2.41-.45-.59-.23-1.01-.5-1.45-.94-.44-.44-.71-.86-.94-1.45-.18-.46-.39-1.17-.45-2.41-.06-1.27-.07-1.67-.07-4.85s.01-3.58.07-4.85c.06-1.24.27-1.95.45-2.41.23-.59.5-1.01.94-1.45.44-.44.86-.71 1.45-.94.46-.18 1.17-.39 2.41-.45 1.27-.06 1.67-.07 4.85-.07m0-2.16C8.74 0 8.28 0 7.01.06 5.72.12 4.58.36 3.57.8c-1.02.44-1.88 1.08-2.74 1.94-.85.86-1.49 1.72-1.94 2.74-.44 1.01-.68 2.15-.74 3.44C0 8.28 0 8.74 0 12s0 3.72.06 4.99c.06 1.29.3 2.43.74 3.44.44 1.02 1.08 1.88 1.94 2.74.86.85 1.72 1.49 2.74 1.94 1.01.44 2.15.68 3.44.74 1.27.06 1.73.06 4.99.06s3.72 0 4.99-.06c1.29-.06 2.43-.3 3.44-.74 1.02-.44 1.88-1.08 2.74-1.94.85-.86 1.49-1.72 1.94-2.74.44-1.01.68-2.15.74-3.44.06-1.27.06-1.73.06-4.99s0-3.72-.06-4.99c-.06-1.29-.3-2.43-.74-3.44-.44-1.02-1.08-1.88-1.94-2.74-.86-.85-1.72-1.49-2.74-1.94-1.01-.44-2.15-.68-3.44-.74C15.72 0 15.26 0 12 0zm0 5.84a6.16 6.16 0 100 12.32 6.16 6.16 0 000-12.32zm0 10.16a4 4 0 110-8 4 4 0 010 8zm6.4-10.88a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
+                      </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Text -->
+            <div class="mt-8 text-center text-sm text-gray-400">
+                <p>&copy; {{ year }} My Django App. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>

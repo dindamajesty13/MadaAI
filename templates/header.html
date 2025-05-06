@@ -1,0 +1,50 @@
+{% load static %}
+
+<header class="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
+    <div class="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
+        <div class="flex items-center gap-2 sm:gap-4 lg:hidden">
+            <!-- Hamburger Toggle BTN -->
+            <button
+                id="sidebarToggle"
+                class="z-50 block rounded-sm border border-gray-300 bg-white p-1.5 shadow-sm dark:border-gray-700 dark:bg-gray-800 lg:hidden"
+            >
+                <span class="relative block h-5.5 w-5.5 cursor-pointer">
+                    <span class="absolute right-0 h-full w-full">
+                        <span id="bar1" class="block h-0.5 w-full rounded-sm bg-black dark:bg-white transition-all duration-200"></span>
+                        <span id="bar2" class="block h-0.5 w-full rounded-sm bg-black dark:bg-white transition-all duration-200 mt-1"></span>
+                        <span id="bar3" class="block h-0.5 w-full rounded-sm bg-black dark:bg-white transition-all duration-200 mt-1"></span>
+                    </span>
+                </span>
+            </button>
+
+            <a class="block flex-shrink-0 lg:hidden" href="{% url 'home' %}">
+                <img width="32" height="32" src="{% static 'images/logo/logo-icon.svg' %}" alt="Logo">
+            </a>
+        </div>
+
+        <!-- Top Navigation Bar -->
+        {% include 'top_navbar.html' %}
+
+        <div class="flex items-center gap-3 2xsm:gap-7">
+            <ul class="flex items-center gap-2 2xsm:gap-4">
+                <!-- Dark Mode -->
+                {% include 'dark_mode_switcher.html' %}
+
+                <!-- Notifications -->
+                {% include 'dropdown_notification.html' %}
+
+                <!-- Messages -->
+                {% include 'dropdown_message.html' %}
+            </ul>
+
+            <!-- User Dropdown -->
+            {% include 'dropdown_user.html' %}
+        </div>
+    </div>
+</header>
+
+<script>
+    document.getElementById("sidebarToggle").addEventListener("click", function() {
+        document.getElementById("sidebar").classList.toggle("hidden");
+    });
+</script>
